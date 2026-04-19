@@ -1,5 +1,6 @@
 {
   "days_back": 1,
+  "end_lag_days": 1,
   "max_records": 200,
   "keywords": ["single-cell", "protein language model", "CRISPR"],
   "description": "与神经退行性疾病、蛋白质折叠或药物发现相关的方法学和实验研究",

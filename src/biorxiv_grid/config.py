@@ -18,6 +18,7 @@ class LLMConfig:
 @dataclass
 class AppConfig:
     days_back: int = 1
+    end_lag_days: int = 1
     max_records: int = 200
     keywords: list[str] | None = None
     description: str | None = None
@@ -44,6 +45,7 @@ def load_config(path: str | Path | None) -> AppConfig:
 
     defaults = {
         "days_back": 1,
+        "end_lag_days": 1,
         "max_records": 200,
         "keywords": [],
         "description": None,
@@ -68,6 +70,7 @@ def load_config(path: str | Path | None) -> AppConfig:
 
     return AppConfig(
         days_back=int(merged["days_back"]),
+        end_lag_days=int(merged["end_lag_days"]),
         max_records=int(merged["max_records"]),
         keywords=[str(x) for x in merged.get("keywords", [])],
         description=merged.get("description"),

@@ -10,11 +10,20 @@ from .models import Preprint
 class BioRxivClient:
     BASE_URL = "https://api.biorxiv.org/details"
 
-    def fetch_latest(self, days_back: int = 1, max_records: int = 200, server: str = "biorxiv") -> list[Preprint]:
+    def fetch_latest(
+        self,
+        days_back: int = 1,
+        max_records: int = 200,
+        server: str = "biorxiv",
+        end_lag_days: int = 1,
+    ) -> list[Preprint]:
         if days_back < 0:
             raise ValueError("days_back must be >= 0")
+        if end_lag_days < 0:
+            raise ValueError("end_lag_days must be >= 0")
 
-        end = date.today()
+        # bioRxiv 当日数据有时尚未整理完整，因此默认回退 1 天作为结束日期。
+        end = date.today() - timedelta(days=end_lag_days)
         start = end - timedelta(days=days_back)
         start_s = start.isoformat()
         end_s = end.isoformat()

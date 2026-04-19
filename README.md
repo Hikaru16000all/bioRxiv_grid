@@ -12,7 +12,7 @@
 
 - **最新预印本扫描**
   - 通过 `https://api.biorxiv.org/details/...` 拉取指定时间窗口内的新论文。
-  - 支持 `days_back` 和 `max_records` 控制抓取范围。
+  - 支持 `days_back`、`end_lag_days` 和 `max_records` 控制抓取范围。
 
 - **筛选**
   - 关键词筛选：标题/摘要中出现关键词即命中。
@@ -62,6 +62,7 @@ biorxiv-grid --config configs/my_run.json --out outputs/latest_results.json
 ```json
 {
   "days_back": 1,
+  "end_lag_days": 1,
   "max_records": 200,
   "keywords": ["single-cell", "CRISPR"],
   "description": "与你关心方向相关的一段描述",
@@ -86,6 +87,7 @@ biorxiv-grid --config configs/my_run.json --out outputs/latest_results.json
 ### 关键字段
 
 - `days_back`: 回溯天数（例如 1=最近一天）。
+- `end_lag_days`: 结束日期相对今天回退天数（默认 1，即按“昨天”为结束日期，避免当日数据未整理完成）。
 - `max_records`: 最大抓取条数。
 - `keywords`: 关键词列表（为空则不做关键词过滤）。
 - `description`: 语义筛选目标描述。

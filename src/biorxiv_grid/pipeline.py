@@ -13,7 +13,11 @@ from .summarizer import summarize_preprints
 
 def run_pipeline(config: AppConfig) -> list[Preprint]:
     client = BioRxivClient()
-    preprints = client.fetch_latest(days_back=config.days_back, max_records=config.max_records)
+    preprints = client.fetch_latest(
+        days_back=config.days_back,
+        max_records=config.max_records,
+        end_lag_days=config.end_lag_days,
+    )
 
     if config.keywords:
         preprints = keyword_filter(preprints, config.keywords)
